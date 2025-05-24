@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import { Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { Product } from '../types/Product';
+import { useCart } from '../context/CartContext';
+
+
 
 type RootStackParamList = {
   ProductDetail: { product: Product };
@@ -10,6 +13,7 @@ type RootStackParamList = {
 type ProductDetailRouteProp = RouteProp<RootStackParamList, 'ProductDetail'>;
 
 export const ProductDetailScreen = () => {
+  const { addToCart } = useCart();
   const route = useRoute<ProductDetailRouteProp>();
   const { product } = route.params;
 
@@ -21,7 +25,7 @@ export const ProductDetailScreen = () => {
       <Text style={styles.description}>
         Esta vela está hecha con ingredientes naturales y aromas suaves para crear una atmósfera relajante en tu hogar.
       </Text>
-      <Button title="Agregar al carrito" onPress={() => console.log('Agregar al carrito:', product.name)} />
+      <Button title="Agregar al carrito" onPress={() => addToCart(product)} />
     </ScrollView>
   );
 };

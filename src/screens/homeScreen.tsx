@@ -2,9 +2,12 @@ import React from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useLayoutEffect } from 'react';
+
 
 import { Product } from '../types/Product';
 import { products } from '../data/products';
+import CartIcon from '../components/CartIcon';
 
 type RootStackParamList = {
   Home: undefined;
@@ -14,8 +17,15 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 
+
 export const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp >();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <CartIcon />,
+    });
+  }, [navigation]);
 
   const renderItem = ({ item }: { item: Product }) => (
     <TouchableOpacity
