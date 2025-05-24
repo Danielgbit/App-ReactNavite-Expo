@@ -1,21 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { HomeScreen } from './src/screens/homeScreen';
-import { AppNavigator } from './src/navigation/AppNavigator';
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { AppNavigator } from "./src/navigation/AppNavigator";
+import { CartProvider } from "./src/context/CartContext";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AppNavigator/>
-    </View>
+    <CartProvider>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </CartProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

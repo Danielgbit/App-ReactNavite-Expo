@@ -10,7 +10,7 @@ interface Props {
 export const ProductCard = ({ product, onPress }: Props) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image style={styles.image} />
+      <Image source={product.image} style={styles.image} /> // ✅ así es correcto en React Native
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.price}>${product.price.toLocaleString()}</Text>
     </TouchableOpacity>

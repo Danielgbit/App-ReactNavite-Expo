@@ -1,39 +1,55 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { ProductCard } from '../components/ProductCard';
+import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { Product } from '../types/Product';
 import { products } from '../data/products';
 
+type RootStackParamList = {
+  Home: undefined;
+  ProductDetail: { product: Product };
+};
+
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+
+
 export const HomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const renderItem = ({ item }: { item: Product }) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate('ProductDetail', { product: item })}
+    >
+      <Image source={item.image} style={styles.image} />
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.price}>${item.price.toLocaleString()}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Catálogo de Velas</Text>
       <FlatList
         data={products}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ProductCard
-            product={item}
-            onPress={() => {
-              console.log('Ir al detalle de:', item.name);
-              // Aquí luego vamos a navegar al detalle
-            }}
-          />
-        )}
-        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={{ padding: 16 }}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#fafafa',
+  container: { flex: 1 },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 10,
+    marginBottom: 10,
+    elevation: 3,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
+  image: { width: '100%', height: 150, borderRadius: 8 },
+  name: { marginTop: 8, fontSize: 16, fontWeight: 'bold' },
+  price: { fontSize: 14, color: '#555' },
 });
