@@ -14,6 +14,7 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 
+
 export const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
