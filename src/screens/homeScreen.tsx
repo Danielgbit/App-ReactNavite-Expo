@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Product } from '../types/Product';
@@ -12,7 +12,6 @@ type RootStackParamList = {
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
-
 
 
 export const HomeScreen = () => {
