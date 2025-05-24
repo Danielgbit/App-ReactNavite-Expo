@@ -3,7 +3,12 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'reac
 import { useCart } from '../context/CartContext';
 
 export const CartScreen = () => {
-  const { cart, removeFromCart, increment, decrement, total } = useCart();
+  const { cart, removeFromCart, increment, decrement } = useCart();
+
+  const total = cart.reduce((accum, item) => {
+    const subTotal = item.price * item.quantity;
+    return accum + subTotal;
+  }, 0);
 
   return (
     <View style={styles.container}>
