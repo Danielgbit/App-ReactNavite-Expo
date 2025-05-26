@@ -3,27 +3,22 @@ import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet } from 'react
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useLayoutEffect } from 'react';
-
-
 import { Product } from '../types/Product';
 import { products } from '../data/products';
 import CartIcon from '../components/CartIcon';
+import { NavigateRoutesApp } from '../types/Navigation';
 
-type RootStackParamList = {
-  Home: undefined;
-  ProductDetail: { product: Product };
-};
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
-
+type HomeScreenNavigationProp = NativeStackNavigationProp<NavigateRoutesApp, 'Home'>;
 
 
 export const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp >();
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <CartIcon />,
+      headerRight: () => <CartIcon/>,
     });
   }, [navigation]);
 

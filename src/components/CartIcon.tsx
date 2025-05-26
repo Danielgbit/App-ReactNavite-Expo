@@ -1,26 +1,23 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCart } from '../context/CartContext';
+import { NavigateRoutesApp } from '../types/Navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const CartIcon = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<NavigateRoutesApp>>();
   const { cart } = useCart();
-
-  console.log(cart);
-  
 
   return (
     <TouchableOpacity
       style={styles.cartButton}
-      onPress={() => navigation.navigate('Cart' as never)}
+      onPress={() => navigation.navigate('Cart')} 
     >
-      <Text>Carrito</Text>
-      {cart.length > 0 && (
+      <Text style={styles.icon}>🛒</Text>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>{cart.length}</Text>
+          <Text style={styles.badgeText}>CART{cart.length}</Text>
         </View>
-      )}
     </TouchableOpacity>
   );
 };
@@ -28,6 +25,10 @@ const CartIcon = () => {
 const styles = StyleSheet.create({
   cartButton: {
     marginRight: 16,
+    padding: 5,
+  },
+  icon: {
+    fontSize: 24,
   },
   badge: {
     position: 'absolute',
@@ -41,8 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   badgeText: {
-    color: '#fff',
-    fontSize: 12,
+    color: 'white',
     fontWeight: 'bold',
   },
 });

@@ -1,16 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Product } from "../types/Product";
+import { CartContextProps } from "../types/CartContext";
+import { CartItem } from "../types/CartItem";
 
-type CartItem = Product & { quantity: number };
-
-interface CartContextProps {
-  cart: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (id: string) => void;
-  increment: (id: string) => void;
-  decrement: (id: string) => void;
-  clearCart: () => void;
-}
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 

@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { useCart } from '../context/CartContext';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NavigateRoutesApp } from '../types/Navigation';
+
+type NavigationProps = NativeStackNavigationProp<NavigateRoutesApp, 'Checkout'>
 
 export const CartScreen = () => {
   const { cart, removeFromCart, increment, decrement } = useCart();
+  const navigation = useNavigation<NavigationProps>();
 
   const total = cart.reduce((accum, item) => {
     const subTotal = item.price * item.quantity;
@@ -30,8 +36,8 @@ export const CartScreen = () => {
       />
       <View style={styles.footer}>
         <Text style={styles.total}>Total: ${total.toLocaleString()}</Text>
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutText}>Ir a pagar</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={styles.checkoutButton}>
+          <Text  style={styles.checkoutText}>Ir a pagar</Text>
         </TouchableOpacity>
       </View>
     </View>
