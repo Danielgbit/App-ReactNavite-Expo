@@ -1,15 +1,15 @@
 // src/screens/CheckoutScreen.tsx
-import React from 'react';
-import { View, Text, Button, StyleSheet, Alert, FlatList } from 'react-native';
-import { useCart } from '../context/CartContext';
-import { useNavigation } from '@react-navigation/native';
-import { NavigateRoutesApp } from '../types/Navigation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import React from "react";
+import { View, Text, Button, StyleSheet, Alert, FlatList } from "react-native";
+import { useCart } from "../context/CartContext";
+import { useNavigation } from "@react-navigation/native";
+import { NavigateRoutesApp } from "../types/Navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const CheckoutScreen = () => {
   const { cart, clearCart } = useCart();
-  const navigation = useNavigation<NativeStackNavigationProp<NavigateRoutesApp>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigateRoutesApp>>();
 
   const total = cart.reduce((acumm, item) => {
     const subTotal = item.price * item.quantity;
@@ -17,10 +17,10 @@ export const CheckoutScreen = () => {
   }, 0);
 
   const handleConfirm = () => {
-    Alert.alert('¡Pedido confirmado!', 'Gracias por tu compra 🕯️', [
-      { text: 'OK', onPress: () => clearCart() },
+    Alert.alert("¡Pedido confirmado!", "Gracias por tu compra 🕯️", [
+      { text: "OK", onPress: () => clearCart() },
     ]);
-    navigation.navigate('Home');
+    navigation.navigate("Home");
   };
 
   const renderItem = ({ item }: any) => (
@@ -47,17 +47,20 @@ export const CheckoutScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 12 },
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  title: { fontSize: 22, fontWeight: "bold", marginBottom: 12 },
   item: {
     marginBottom: 12,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
     borderRadius: 8,
     elevation: 2,
   },
-  name: { fontSize: 16, fontWeight: 'bold' },
-  quantity: { fontSize: 14, color: '#666' },
-  price: { fontSize: 14, color: '#333' },
-  total: { fontSize: 20, fontWeight: 'bold', marginVertical: 20 },
+  name: { fontSize: 16, fontWeight: "bold" },
+  quantity: { fontSize: 14, color: "#666" },
+  price: { fontSize: 14, color: "#333" },
+  total: { fontSize: 20, fontWeight: "bold", marginVertical: 20 },
 });
