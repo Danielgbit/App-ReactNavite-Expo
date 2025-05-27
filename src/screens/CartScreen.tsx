@@ -34,16 +34,29 @@ export const CartScreen = () => {
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text style={styles.name}>{item.name}</Text>
-            <Text>
+            <Text style={styles.price}>
               ${item.price} x {item.quantity}
             </Text>
             <View style={styles.actions}>
-              <Button title="+" onPress={() => increment(item.id)} />
-              <Button title="-" onPress={() => decrement(item.id)} />
-              <Button
-                title="Eliminar"
+              <TouchableOpacity
+                style={styles.buttonContainerActions}
+                onPress={() => increment(item.id)}
+              >
+                <Text style={styles.textButtonActions}>+</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.buttonContainerActions}
+                onPress={() => decrement(item.id)}
+              >
+                <Text style={styles.textButtonActions}>-</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.buttonContainerActions}
                 onPress={() => removeFromCart(item.id)}
-              />
+              >
+                <Text style={styles.textButtonActions}>Eliminar</Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -52,9 +65,9 @@ export const CartScreen = () => {
         <Text style={styles.total}>Total: ${total.toLocaleString()}</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate("Checkout")}
-          style={styles.checkoutButton}
+          style={styles.button}
         >
-          <Text style={styles.checkoutText}>Ir a pagar</Text>
+          <Text style={styles.buttonText}>Ir a pagar</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -65,19 +78,55 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    experimental_backgroundImage: "background: linear-gradient(90deg,rgba(43, 43, 4, 1) 0%, rgba(120, 118, 53, 1) 100%);",
+    experimental_backgroundImage:
+      "background: linear-gradient(90deg,#2b2b04 0%, rgba(120, 118, 53, 1) 100%);",
   },
-  empty: { textAlign: "center", marginTop: 20, fontSize: 16 },
+  price: { color: "#FFFFDB", marginTop: 5, letterSpacing: -0.5 },
+  empty: { textAlign: "center", marginTop: 20, fontSize: 16, color: "#FFFFDB" },
   item: { marginBottom: 16 },
-  name: { fontSize: 16, fontWeight: "bold" },
-  actions: { flexDirection: "row", gap: 8, marginTop: 6 },
+  name: { fontSize: 16, fontWeight: "bold", color: "#FFFFDB" },
+  actions: { flexDirection: "row", gap: 8, marginTop: 20 },
   footer: { marginTop: 20 },
-  total: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
+  total: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#FFFFDB",
+  },
   checkoutButton: {
     backgroundColor: "#000",
     padding: 12,
     borderRadius: 8,
     alignItems: "center",
   },
-  checkoutText: { color: "#fff", fontSize: 16 },
+  button: {
+    backgroundColor: "#FFFFDB",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    fontWeight: "700",
+    color: "#000",
+  },
+
+  buttonContainerActions: {
+    backgroundColor: "#FFFFDB",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textButtonActions: {
+    color: "#2b2b04",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });

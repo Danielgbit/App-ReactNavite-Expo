@@ -16,7 +16,7 @@ const CartIcon = () => {
     >
       <Text style={styles.icon}>🛒</Text>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>CART{cart.length}</Text>
+          <Text style={styles.badgeText}>{cart.length}</Text>
         </View>
     </TouchableOpacity>
   );
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   },
   badge: {
     position: 'absolute',
-    right: -6,
-    top: -4,
-    backgroundColor: 'red',
+    right: 1,
+    top: 5,
+    backgroundColor: "#2b2b04", 
     borderRadius: 10,
     paddingHorizontal: 5,
     minWidth: 20,

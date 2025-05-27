@@ -1,6 +1,13 @@
 // src/screens/CheckoutScreen.tsx
 import React from "react";
-import { View, Text, Button, StyleSheet, Alert, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  FlatList,
+} from "react-native";
 import { useCart } from "../context/CartContext";
 import { useNavigation } from "@react-navigation/native";
 import { NavigateRoutesApp } from "../types/Navigation";
@@ -41,7 +48,9 @@ export const CheckoutScreen = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
       />
       <Text style={styles.total}>Total: ${total.toLocaleString()}</Text>
-      <Button title="Confirmar pedido" onPress={handleConfirm} />
+      <TouchableOpacity style={styles.buttonConfirm} onPress={handleConfirm}>
+        <Text style={styles.textButtonConfirm}>Confirmar pedido</Text>
+      </TouchableOpacity>{" "}
     </View>
   );
 };
@@ -50,17 +59,47 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    experimental_backgroundImage:
+      "background: linear-gradient(90deg,#2b2b04 0%, rgba(120, 118, 53, 1) 100%);",
   },
-  title: { fontSize: 22, fontWeight: "bold", marginBottom: 12 },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 12,
+    color: "#FFFFDB",
+    letterSpacing: -0.8,
+  },
   item: {
     marginBottom: 12,
-    backgroundColor: "#fff",
+    backgroundColor: "#C2C293",
     padding: 10,
     borderRadius: 8,
     elevation: 2,
   },
-  name: { fontSize: 16, fontWeight: "bold" },
-  quantity: { fontSize: 14, color: "#666" },
-  price: { fontSize: 14, color: "#333" },
-  total: { fontSize: 20, fontWeight: "bold", marginVertical: 20 },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#3D3D0B",
+    letterSpacing: -0.8,
+  },
+  quantity: { fontSize: 14, color: "#3D3D0B", letterSpacing: -0.8 },
+  price: { fontSize: 14, color: "#3D3D0B", letterSpacing: -0.8 },
+  total: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 20,
+    color: "#FFFFDB",
+  },
+  buttonConfirm: {
+    backgroundColor: "#FFFFDB",
+    padding: 10,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textButtonConfirm: {
+    color: "#2b2b04",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });

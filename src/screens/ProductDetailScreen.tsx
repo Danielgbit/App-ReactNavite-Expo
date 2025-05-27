@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  View,
-  Alert,
+import { Text, StyleSheet, Image, TouchableOpacity, View, Alert,
 } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { useCart } from "../context/CartContext";
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#FFFFCF",
     marginBottom: 20,
-    letterSpacing: 20
+    letterSpacing: -0.8
   },
   button: {
     backgroundColor: '#FFFFDB',
@@ -84,7 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    // Sombras para efecto de elevación
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -93,6 +86,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: '700',
-    color: '#000', // Asegúrate de tener buen contraste
+    color: '#000',
   },
 });
