@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet, Image, TouchableOpacity, View, Alert,
 } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { useCart } from "../context/CartContext";
+import useCart from "../hooks/useCart";
 import { NavigateRoutesApp } from "../types/Navigation";
 import { Product } from "../types/Product";
 

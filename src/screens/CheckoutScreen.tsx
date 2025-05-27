@@ -8,13 +8,14 @@ import {
   Alert,
   FlatList,
 } from "react-native";
-import { useCart } from "../context/CartContext";
+import useCart from "../hooks/useCart";
 import { useNavigation } from "@react-navigation/native";
 import { NavigateRoutesApp } from "../types/Navigation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const CheckoutScreen = () => {
   const { cart, clearCart } = useCart();
+
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigateRoutesApp>>();
 
