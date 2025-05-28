@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useCart } from '../context/CartContext';
 import { NavigateRoutesApp } from '../types/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import useCart from '../hooks/useCart';
 
 const CartIcon = () => {
   const navigation = useNavigation<NativeStackNavigationProp<NavigateRoutesApp>>();

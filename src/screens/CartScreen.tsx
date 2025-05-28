@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { useCart } from "../context/CartContext";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { NavigateRoutesApp } from "../types/Navigation";
+import useCart from "../hooks/useCart";
 
 type NavigationProps = NativeStackNavigationProp<NavigateRoutesApp, "Checkout">;
 

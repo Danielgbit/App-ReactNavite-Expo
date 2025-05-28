@@ -3,7 +3,6 @@ import { TouchableOpacity, Text, Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Product } from '../types/Product';
 
-
 interface ProductCardProps {
   product: Product;
   onPress: () => void;
@@ -11,12 +10,15 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product, onPress }: ProductCardProps) => {
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={onPress}
-      activeOpacity={0.8}
-    >
-      <Image source={product.image} style={styles.image} />
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
+<Image
+  source={
+    typeof product.image === 'string'
+      ? { uri: product.image }
+      : product.image
+  }
+  style={styles.image}
+/>
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.price}>${product.price.toLocaleString()}</Text>
     </TouchableOpacity>

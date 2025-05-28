@@ -1,17 +1,22 @@
 import React from "react";
-import { View, FlatList, Text, StyleSheet, } from "react-native";
+import { View, FlatList, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLayoutEffect } from "react";
-import { products } from "../data/products";
 import CartIcon from "../components/CartIcon";
 import { NavigateRoutesApp } from "../types/Navigation";
 import { ProductCard } from "../components/ProductCard";
+import { useDB } from "../hooks/useDB";  // <-- Aquí importas el hook
 
-type HomeScreenNavigationProp = NativeStackNavigationProp< NavigateRoutesApp, "Home" >;
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  NavigateRoutesApp,
+  "Home"
+>;
 
 export const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const { products } = useDB();  // <-- obtienes productos desde la base
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -19,20 +24,29 @@ export const HomeScreen = () => {
     });
   }, [navigation]);
 
+  if (!products || products.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.titleHeader}>Cargando productos...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleHeader}>PRODUCTOS</Text>
-      <FlatList data={products} keyExtractor={(item) => item.id} renderItem={({ item }) => (
-          <ProductCard 
-            product={item} 
+      <FlatList
+        data={products}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ProductCard
+            product={item}
             onPress={() => navigation.navigate("ProductDetail", { product: item })}
           />
         )}
         contentContainerStyle={{ padding: 16 }}
       />
     </View>
-
   );
 };
 
@@ -43,10 +57,11 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     letterSpacing: -0.8,
     fontSize: 20,
-    color: '#FFFFDB'
+    color: "#FFFFDB",
   },
   container: {
     flex: 1,
-    experimental_backgroundImage: 'background: linear-gradient(90deg,rgba(43, 43, 4, 1) 0%, rgba(120, 118, 53, 1) 100%);',
+    // corregí para evitar error, no uses experimental_backgroundImage
+    backgroundColor: "rgba(43, 43, 4, 1)",
   },
 });
