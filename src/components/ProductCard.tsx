@@ -12,8 +12,8 @@ export const ProductCard = ({ product, onPress }: ProductCardProps) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
       <Image source={{ uri: product.image }} style={styles.image} />
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.price}>${product.price.toLocaleString()}</Text>
+      <Text style={[styles.name, {fontFamily: 'Poppins_400Regular'}]}>{product.name}</Text>
+      <Text style={[styles.price, {fontFamily: 'Poppins_700Bold'}]}>${product.price.toLocaleString()}</Text>
     </TouchableOpacity>
   );
 };
@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
   name: {
     marginTop: 8,
     fontSize: 16,
-    fontWeight: "bold",
     color: "#3D3D0B",
+    letterSpacing: -0.5
   },
   price: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#3D3D0B",
   },
 });

@@ -1,12 +1,5 @@
-// src/screens/CheckoutScreen.tsx
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-  FlatList,
+import { View, Text, TouchableOpacity, StyleSheet, Alert, FlatList,
 } from "react-native";
 import useCart from "../hooks/useCart";
 import { useNavigation } from "@react-navigation/native";
@@ -33,25 +26,25 @@ export const CheckoutScreen = () => {
 
   const renderItem = ({ item }: any) => (
     <View style={styles.item}>
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.quantity}>Cantidad: {item.quantity}</Text>
-      <Text style={styles.price}>Precio: ${item.price.toLocaleString()}</Text>
+      <Text style={[styles.name, { fontFamily: 'Poppins_700Bold'} ]}>{item.name}</Text>
+      <Text style={[styles.quantity, { fontFamily: 'Poppins_500Medium'} ]}>Cantidad: {item.quantity}</Text>
+      <Text style={[styles.price, { fontFamily: 'Poppins_700Bold'} ]}>Precio: ${item.price.toLocaleString()}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Resumen del pedido</Text>
+      <Text style={[styles.title, { fontFamily: 'Poppins_700Bold'} ]}>Resumen del pedido</Text>
       <FlatList
         data={cart}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
-      <Text style={styles.total}>Total: ${total.toLocaleString()}</Text>
+      <Text style={[styles.total, { fontFamily: 'Poppins_700Bold'} ]}>Total: ${total.toLocaleString()}</Text>
       <TouchableOpacity style={styles.buttonConfirm} onPress={handleConfirm}>
-        <Text style={styles.textButtonConfirm}>Confirmar pedido</Text>
-      </TouchableOpacity>{" "}
+        <Text style={[styles.textButtonConfirm, { fontFamily: 'Poppins_700Bold'} ]}>Confirmar pedido</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -64,7 +57,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "bold",
     marginBottom: 12,
     color: "#FFFFDB",
     letterSpacing: -0.8,
@@ -78,15 +70,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "bold",
     color: "#3D3D0B",
     letterSpacing: -0.8,
   },
-  quantity: { fontSize: 14, color: "#3D3D0B", letterSpacing: -0.8 },
-  price: { fontSize: 14, color: "#3D3D0B", letterSpacing: -0.8 },
+  quantity: { fontSize: 15, color: "#3D3D0B", letterSpacing: -0.8 },
+  price: { fontSize: 18, color: "#3D3D0B", letterSpacing: -0.8 },
   total: {
     fontSize: 20,
-    fontWeight: "bold",
     marginVertical: 20,
     color: "#FFFFDB",
   },
@@ -100,6 +90,5 @@ const styles = StyleSheet.create({
   textButtonConfirm: {
     color: "#2b2b04",
     fontSize: 16,
-    fontWeight: "bold",
   },
 });

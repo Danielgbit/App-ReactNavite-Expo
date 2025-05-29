@@ -27,14 +27,18 @@ export const CartScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={cart}
-        keyExtractor={(item) => item.id}
+keyExtractor={(item) => (item.id as string | number).toString()}
         ListEmptyComponent={
-          <Text style={styles.empty}>Tu carrito está vacío</Text>
+          <Text style={[styles.empty, { fontFamily: "Poppins_400Regular" }]}>
+            Tu carrito está vacío
+          </Text>
         }
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.price}>
+            <Text style={[styles.name, { fontFamily: "Poppins_500Medium" }]}>
+              {item.name}
+            </Text>
+            <Text style={[styles.price, { fontFamily: "Poppins_700Bold" }]}>
               ${item.price} x {item.quantity}
             </Text>
             <View style={styles.actions}>
@@ -55,20 +59,35 @@ export const CartScreen = () => {
                 style={styles.buttonContainerActions}
                 onPress={() => removeFromCart(item.id)}
               >
-                <Text style={styles.textButtonActions}>Eliminar</Text>
+                <Text
+                  style={[
+                    styles.textButtonActions,
+                    { fontFamily: "Poppins_700Bold" },
+                  ]}
+                >
+                  Eliminar
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
         )}
       />
       <View style={styles.footer}>
-        <Text style={styles.total}>Total: ${total.toLocaleString()}</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Checkout")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Ir a pagar</Text>
-        </TouchableOpacity>
+        <Text style={[styles.total, { fontFamily: "Poppins_700Bold" }]}>
+          {total > 0 && `Total: ${total.toLocaleString()}`}
+        </Text>
+        {cart.length > 0 && (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Checkout")}
+            style={styles.button}
+          >
+            <Text
+              style={[styles.buttonText, { fontFamily: "Poppins_700Bold" }]}
+            >
+              Ir a pagar
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -80,15 +99,24 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "rgba(43, 43, 4, 1)",
   },
-  price: { color: "#FFFFDB", marginTop: 5, letterSpacing: -0.5 },
-  empty: { textAlign: "center", marginTop: 20, fontSize: 16, color: "#FFFFDB" },
+  price: { color: "#FFFFDB", marginTop: 5, letterSpacing: 1, fontSize: 16 },
+  empty: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 16,
+    color: "#FFFFDB",
+    letterSpacing: -0.8,
+  },
   item: { marginBottom: 16 },
-  name: { fontSize: 16, fontWeight: "bold", color: "#FFFFDB" },
+  name: {
+    fontSize: 16,
+    color: "#FFFFDB",
+    letterSpacing: -0.5,
+  },
   actions: { flexDirection: "row", gap: 8, marginTop: 20 },
   footer: { marginTop: 20 },
   total: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
     marginBottom: 10,
     color: "#FFFFDB",
   },
@@ -112,7 +140,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontWeight: "700",
     color: "#000",
   },
 
@@ -126,6 +153,5 @@ const styles = StyleSheet.create({
   textButtonActions: {
     color: "#2b2b04",
     fontSize: 16,
-    fontWeight: "bold",
   },
 });

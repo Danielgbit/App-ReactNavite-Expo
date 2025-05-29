@@ -28,10 +28,9 @@ export const ProductDetailScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: product.image }} style={styles.image} />
-
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.price}>${product.price.toLocaleString()}</Text>
-      <Text style={styles.description}>
+      <Text style={[styles.name, { fontFamily: "Poppins_500Medium" }]}>{product.name}</Text>
+      <Text style={[styles.price, { fontFamily: "Poppins_700Bold" }]}>${product.price.toLocaleString()}</Text>
+      <Text style={[styles.description, { fontFamily: "Poppins_400Regular" }]}>
         {product.description || "Sin descripción"}
       </Text>
       <TouchableOpacity
@@ -39,7 +38,7 @@ export const ProductDetailScreen = () => {
         onPress={() => sendToCart(product)}
         activeOpacity={0.7}
       >
-        <Text style={styles.buttonText}>AGREGAR AL CARRITO</Text>
+        <Text style={[styles.buttonText, { fontFamily: "Poppins_700Bold" }]}>AGREGAR AL CARRITO</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
-    fontWeight: "bold",
     marginBottom: 6,
     color: "#FFFFDB",
   },
@@ -89,7 +87,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontWeight: "700",
     color: "#000",
   },
 });
