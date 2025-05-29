@@ -7,14 +7,20 @@ import {
   View,
   Alert,
 } from "react-native";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import useCart from "../hooks/useCart";
 import { NavigateRoutesApp } from "../types/Navigation";
 import { Product } from "../types/Product";
+import { useCustomHeader } from "../hooks/useCustomHeader";
+
 
 type ProductDetailRouteProp = RouteProp<NavigateRoutesApp, "ProductDetail">;
 
+
 export const ProductDetailScreen = () => {
+
+  useCustomHeader();
+
   const { addToCart } = useCart();
   const route = useRoute<ProductDetailRouteProp>();
   const { product } = route.params;

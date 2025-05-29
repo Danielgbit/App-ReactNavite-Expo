@@ -7,6 +7,7 @@ import CartIcon from "../components/CartIcon";
 import { NavigateRoutesApp } from "../types/Navigation";
 import { ProductCard } from "../components/ProductCard";
 import { useDB } from "../hooks/useDB";
+import { useCustomHeader } from "../hooks/useCustomHeader";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   NavigateRoutesApp,
@@ -14,15 +15,12 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 export const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const { products } = useDB();
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <CartIcon />,
-    });
-  }, [navigation]);
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  useCustomHeader();
 
   if (!products || products.length === 0) {
     return (
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.8,
     fontSize: 20,
     color: "#FFFFDB",
-    fontFamily: "Poppins_400Regular"
+    fontFamily: "Poppins_400Regular",
   },
   container: {
     flex: 1,

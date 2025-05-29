@@ -24,8 +24,9 @@ const CartIcon = () => {
 
 const styles = StyleSheet.create({
   cartButton: {
-    marginRight: 16,
     padding: 5,
+    backgroundColor: "rgb(84, 84, 49)",
+    borderRadius: 50
   },
   icon: {
     fontSize: 24,

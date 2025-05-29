@@ -11,12 +11,14 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { NavigateRoutesApp } from "../types/Navigation";
 import useCart from "../hooks/useCart";
+import { useCustomHeader } from "../hooks/useCustomHeader";
 
 type NavigationProps = NativeStackNavigationProp<NavigateRoutesApp, "Checkout">;
 
 export const CartScreen = () => {
   const { cart, removeFromCart, increment, decrement } = useCart();
   const navigation = useNavigation<NavigationProps>();
+  useCustomHeader();
 
   const total = cart.reduce((accum, item) => {
     const subTotal = item.price * item.quantity;
