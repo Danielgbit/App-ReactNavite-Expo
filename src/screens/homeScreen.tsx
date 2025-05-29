@@ -16,7 +16,7 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 export const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const { products } = useDB();  // <-- obtienes productos desde la base
+  const { products } = useDB();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // corregí para evitar error, no uses experimental_backgroundImage
     backgroundColor: "rgba(43, 43, 4, 1)",
   },
 });

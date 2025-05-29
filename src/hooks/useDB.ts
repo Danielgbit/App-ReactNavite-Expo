@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import * as SQLite from 'expo-sqlite';
-import { Asset } from 'expo-asset';
-import { products as initialProducts } from '../data/products'; // productos precargados
-import { Product } from '../types/Product';
+import { useEffect, useState } from "react";
+import * as SQLite from "expo-sqlite";
+import { products as initialProducts } from "../data/products";
+import { Product } from "../types/Product";
 
 export function useDB() {
   const [db, setDb] = useState<SQLite.SQLiteDatabase | null>(null);
@@ -10,7 +9,7 @@ export function useDB() {
 
   useEffect(() => {
     const init = async () => {
-      const dbInstance = await SQLite.openDatabaseAsync('app.db');
+      const dbInstance = await SQLite.openDatabaseAsync("app.db");
       setDb(dbInstance);
 
       await dbInstance.execAsync(`
@@ -18,22 +17,18 @@ export function useDB() {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
           price INTEGER NOT NULL,
-          image TEXT
+          image TEXT,
+          description TEXT
         );
       `);
 
       const existing = await dbInstance.getAllAsync(`SELECT * FROM products;`);
 
       if (existing.length === 0) {
-        // Insertar productos precargados
         for (const p of initialProducts) {
-          const asset = Asset.fromModule(p.image);
-          await asset.downloadAsync();
-          const imageUrl = asset.localUri || asset.uri;
-
           await dbInstance.runAsync(
-            `INSERT INTO products (name, price, image) VALUES (?, ?, ?)`, // <-- Solo 3 signos
-            [p.name, p.price, imageUrl]  // <-- No pases el id ni un 1
+            `INSERT INTO products (name, price, image, description) VALUES (?, ?, ?, ?)`,
+            [p.name, p.price, p.image, p.description]
           );
         }
       }
@@ -52,11 +47,16 @@ export function useDB() {
     setProducts(rows);
   };
 
-  const addProduct = async (name: string, price: number, image: string) => {
+  const addProduct = async (
+    name: string,
+    price: number,
+    image: string,
+    description: string
+  ) => {
     if (!db) return;
     await db.runAsync(
-      `INSERT INTO products (name, price, image) VALUES (?, ?, ?)`, // 3 signos
-      [name, price, image]
+      `INSERT INTO products (name, price, image, description) VALUES (?, ?, ?, ?)`,
+      [name, price, image, description]
     );
     await fetchProducts();
   };

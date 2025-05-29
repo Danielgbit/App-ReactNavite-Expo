@@ -78,8 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    experimental_backgroundImage:
-      "background: linear-gradient(90deg,#2b2b04 0%, rgba(120, 118, 53, 1) 100%);",
+    backgroundColor: "rgba(43, 43, 4, 1)",
   },
   price: { color: "#FFFFDB", marginTop: 5, letterSpacing: -0.5 },
   empty: { textAlign: "center", marginTop: 20, fontSize: 16, color: "#FFFFDB" },

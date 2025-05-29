@@ -1,6 +1,7 @@
 export interface Product {
-  id: string;
+  id: number | string;
   name: string;
   price: number;
-  image: string; // solo URL o path local en string
+  image: string;
+  description: string;
 }
