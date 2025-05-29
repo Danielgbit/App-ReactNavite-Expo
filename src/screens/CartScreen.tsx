@@ -27,7 +27,7 @@ export const CartScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={cart}
-keyExtractor={(item) => (item.id as string | number).toString()}
+        keyExtractor={(item) => item.id.toString()}
         ListEmptyComponent={
           <Text style={[styles.empty, { fontFamily: "Poppins_400Regular" }]}>
             Tu carrito está vacío
@@ -44,20 +44,20 @@ keyExtractor={(item) => (item.id as string | number).toString()}
             <View style={styles.actions}>
               <TouchableOpacity
                 style={styles.buttonContainerActions}
-                onPress={() => increment(item.id)}
+                onPress={() => increment(item.id.toLocaleString())}
               >
                 <Text style={styles.textButtonActions}>+</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.buttonContainerActions}
-                onPress={() => decrement(item.id)}
+                onPress={() => decrement(item.id.toString())}
               >
                 <Text style={styles.textButtonActions}>-</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonContainerActions}
-                onPress={() => removeFromCart(item.id)}
+                onPress={() => removeFromCart(item.id.toString())}
               >
                 <Text
                   style={[

@@ -37,7 +37,7 @@ export const CheckoutScreen = () => {
       <Text style={[styles.title, { fontFamily: 'Poppins_700Bold'} ]}>Resumen del pedido</Text>
       <FlatList
         data={cart}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 20 }}
       />

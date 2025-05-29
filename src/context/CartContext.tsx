@@ -27,13 +27,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prev) => prev.filter((item) => item.id.toString() !== id));
   };
 
   const increment = (id: string) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id.toString() === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
@@ -42,7 +42,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id.toString() === id ? { ...item, quantity: item.quantity - 1 } : item
         )
         .filter((item) => item.quantity > 0)
     );
